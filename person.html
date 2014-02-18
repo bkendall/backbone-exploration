@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <title>Backbone!</title>
+</head>
+<body>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="http://backbonejs.org/backbone-min.js"></script>
+  <script type="text/javascript">
+(function ($) {
+
+Person = Backbone.Model.extend({
+  defaults: {
+    name: 'Baby',
+    age: 0,
+    child: ''
+  },
+  initialize: function() {
+    console.log('welcome');
+    this.on('change:name', function(model) {
+      var name = model.get('name');
+      console.log('Changed name to ' + name);
+    });
+  },
+  adopt: function(name) {
+    this.set({ child: name });
+  }
+});
+
+var person = new Person({ name: 'Thomas', age: 21 });
+
+console.log(person.get('name'));
+console.log(person.get('age'));
+console.log(person.get('child'));
+
+person.adopt('John');
+console.log(person.get('child'));
+
+person.set({ name: 'Bryan' });
+
+})(jQuery);
+  </script>
+</body>
+</html>

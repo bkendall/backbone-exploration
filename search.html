@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <title>Backbone!</title>
+</head>
+<body>
+  <div id="search_container">
+  </div>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="http://backbonejs.org/backbone-min.js"></script>
+
+  <script type="text/template" id="search_template">
+<label>Search</label>
+<input type="text" id="search_text" />
+<input type="button" id="search_button" value="Search" />
+  </script>
+
+  <script type="text/javascript">
+(function ($) {
+
+SearchView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  },
+  render: function() {
+    var template = _.template( $('#search_template').html(), {});
+    this.$el.html(template);
+  },
+  events: {
+    'click input[type=button]': 'doSearch'
+  },
+  doSearch: function(event) {
+    console.log('Search for ' + $('#search_text').val());
+  }
+});
+
+var search_view = new SearchView({ el: $('#search_container') });
+
+})(jQuery);
+  </script>
+</body>
+</html>

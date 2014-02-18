@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <title>Backbone!</title>
+</head>
+<body>
+
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="http://backbonejs.org/backbone-min.js"></script>
+
+  <script type="text/javascript">
+(function ($) {
+
+var Song = Backbone.Model.extend({
+  defaults: {
+    name: 'not specified',
+    artist: 'not specified'
+  },
+  initialize: function() {
+    console.log('Music is the answer');
+  }
+});
+
+var Album = Backbone.Collection.extend({
+  model: Song
+});
+
+var song1 = new Song({ name: 'How Bizzare', artist: 'OMC' });
+var song2 = new Song({ name: 'Sexual Healing', artist: 'Marvin Gaye' });
+var song3 = new Song({ name: 'Talk It Over In Bed', artist: 'OMC' });
+
+var myAlbum = new Album([ song1, song2, song3]);
+console.log(myAlbum.models);
+
+})(jQuery);
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <title>Backbone!</title>
+</head>
+<body>
+
+  <a href="#/posts/12">#/posts/12</a><br />
+  <a href="#/download/path/to/a/file">#/download/path/to/a/file</a><br />
+  <a href="#/dashboard/graph">#/dashboard/graph</a>
+
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="http://backbonejs.org/backbone-min.js"></script>
+
+  <script type="text/javascript">
+(function ($) {
+
+var AppRouter = Backbone.Router.extend({
+  routes: {
+    'posts/:id': 'getPost',
+    'download/*path': 'downloadFile',
+    ':route/:action': 'loadView'
+  }
+});
+
+var app_router = new AppRouter();
+
+app_router.on('route:getPost', function(id) {
+  console.log('Getting post with id ' + id);
+});
+
+app_router.on('route:downloadFile', function(path) {
+  console.log(path);
+});
+
+app_router.on('route:loadView', function(route, action) {
+  console.log(route + '_' + action);
+});
+
+Backbone.history.start();
+
+})(jQuery);
+  </script>
+</body>
+</html>
